@@ -1,0 +1,76 @@
+{% extends 'core/base/base.html' %}
+{% load static %}
+{% block title %}{{client.full_name}}{% endblock %}
+{% block content %}
+<section id="main-content">
+  <section class="wrapper">
+		<div class="row">
+      <div class="col-lg-12">
+        <section class="panel">					
+					<div class="row">
+						<div class="col-lg-12">
+							<!--<h3 class="page-header"><i class="fa fa-table"></i>List</h3>-->
+							<div class="col-sm-12 dark-bg">
+								<h2 class="text-center">Detalle <b>Cliente</b></h2>
+							</div>
+						</div>
+            <!-- Image -->
+            <div class="form-group">
+									<div class="col-sm-12">
+										{% if customer.image %}
+                      <img src="{{customer.image.url}}" class="img-fluid">
+                    {% else %}
+                      <img src="{% static 'registration/img/no-avatar.jpg' %}" class="img-fluid">
+                    {% endif %}
+									</div>
+								</div>
+						<div class="panel-body">
+								<div class="form-group">
+									<label class="col-sm-2 control-label">Nombre: </label>
+									<div class="col-sm-10">
+										<p class="form-control">{{customer.full_name}}</p>
+									</div>
+								</div>
+                <div class="form-group">
+									<label class="col-sm-2 control-label">DNI: </label>
+									<div class="col-sm-10">
+										<p class="form-control">{{customer.id_card}}</p>
+									</div>
+								</div><div class="form-group">
+									<label class="col-sm-2 control-label">Descripcion: </label>
+									<div class="col-sm-10">
+										<p class="form-control">{{customer.desc}}</p>
+									</div>
+								</div><div class="form-group">
+									<label class="col-sm-2 control-label">Celular: </label>
+									<div class="col-sm-10">
+										<p class="form-control">{{customer.movile}}</p>
+									</div>
+								</div>
+                				<div class="form-group">
+									<label class="col-sm-2 control-label">Teléfono: </label>
+									<div class="col-sm-10">
+										<p class="form-control">{{customer.telephone}}</p>
+									</div>
+								</div>
+							<div class="form-group">
+								<div class="col-lg-offset-2 col-lg-10">
+									<div class="btn-row">
+										<div class="btn-group">
+											<a class= "btn btn-primary" href="{% url 'customers:customers' %}">OK</a>
+											{% if request.user.is_staff %}
+												<a class= "btn btn-danger" href="{% url 'customers:delete' customer.id %}">Eliminar</a>
+												<a class= "btn btn-info" href="{% url 'customers:update' customer.id %}">Editar</a>
+											{% endif %}
+										</div>
+									</div>  								
+								</div>		
+							</div>	
+						</div>
+				  </div>                  
+				</section>
+      </div>
+		</div>
+	</section>
+</section>
+{% endblock %}

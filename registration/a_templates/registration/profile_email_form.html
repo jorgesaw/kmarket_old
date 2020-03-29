@@ -1,0 +1,37 @@
+{% extends 'core/base/base.html' %}
+{% load static %}
+{% block title %}Change email{% endblock %}
+{% block content %}
+<!--main content start-->
+<section id="main-content">
+  <section class="wrapper">
+    {% if 'change_email' in request.GET %}
+      <div class="panel panel-success">
+       <div class="panel-heading">Email actualizado exitosamente.</div>
+      </div>
+    {% endif %}
+    <form class="form-horizontal" action="" method="post">{% csrf_token %}
+      <div class="row"> 
+        <section class="panel">
+          <header class="panel-heading">
+            Actualizar email
+          </header>
+          <div class="panel-body">
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Email</label>
+              <div class="col-sm-10">
+                {{form.email}}
+              </div>
+            </div> 
+            <div class="form-group">
+              <div class="col-lg-offset-2 col-lg-10">
+                <input class="btn btn-primary" type="submit" value="Actualizar">
+              </div>
+            </div>    
+          </div>
+        </section>
+      </div>
+    </form>
+  </section>
+</section>
+{% endblock %}

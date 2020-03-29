@@ -1,0 +1,74 @@
+{% extends 'core/base/base.html' %}
+{% load static %}
+{% block title %}Login{% endblock %}
+{% block css_page %}
+  {% include 'registration/includes/css.html' %}
+{% endblock %}
+
+{% block body_page %}
+<body class="hold-transition login-page">
+  <div class="login-box">
+  |<div class="login-logo">
+    <a href="{% url 'home' %}%"><b>Admin</b>KBE</a>
+    </div>
+  <!-- /.login-logo -->
+  <div class="login-box-body">
+    <p class="login-box-msg">Regístrate para iniciar sesión</p>
+
+    <form action="" method="post">{% csrf_token %}
+     
+     {% if form.non_field_errors %}
+        <div class="callout callout-danger alert alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-ban"></i> Error!</h4>
+            Usuario o contraseña incorrectos, prueba de nuevo.
+          </div>
+      {% endif %}
+
+      <div class="form-group has-feedback">
+        <input type="text" class="form-control" name="username" maxlength="254" placeholder="Usuario"
+                id="id_username" required autofocus>
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="password" class="form-control" name="password" 
+                  id="id_password" placeholder="Password" required>
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="row">
+        <div class="col-xs-8">
+          <div class="checkbox icheck">
+            <label>
+              <input type="checkbox"> Recuérdame
+            </label>
+          </div>
+        </div>
+        <!-- /.col -->
+        <div class="col-xs-4">
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Loguearme</button>
+        </div>
+        <!-- /.col -->
+      </div>
+    </form>
+
+  <div class="social-auth-links text-center">
+  <p>- O -</p>
+  <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using
+    Facebook</a>
+  <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using
+    Google+</a>
+  </div>
+  <!-- /.social-auth-links -->
+  <a href="{% url 'password_reset' %}">Perdí mi contraseña</a><br>
+  <a href="{% url 'signup' %}" class="text-center">Registrar un nuevo miembro</a>
+  </div>
+  <!-- /.login-box-body -->
+  </div>
+  <!-- /.login-box -->
+
+  <!-- Archivos js propios de cada página -->
+  {% block js_page %}
+    {% include 'registration/includes/js.html' %}
+  {% endblock %}
+</body>
+{% endblock %}

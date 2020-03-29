@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}{% endblock %} | KMarket</title>
+    {% load static %}
+    <!-- Fuentes -->
+     {% include 'core/includes/fonts.html' %} 
+    <!-- Estilos -->
+     {% include 'core/includes/css.html' %} 
+     {% include 'core/includes/css_style.html' %} 
+  </head>
+  <body>
+    <body>
+      <!-- Navegación -->
+      {% include 'core/includes/nav.html' %} 
+      <!-- Contenido -->
+      {% block content %}{% endblock %}
+      <!-- Footter -->
+      {% include 'core/includes/footer.html' %} 
+      <!-- Javascript -->
+      {% include 'core/includes/js.html' %}
+      {% include 'core/includes/js_my.html' %} 
+  </body>
+</html>

@@ -1,0 +1,58 @@
+{% extends 'core/base/base.html' %}
+{% load static %}
+{% block title %}Categorias{% endblock %}
+{% block content %}
+<section class="content-header">
+  <h1>
+    Categorias
+  </h1>
+</section>
+<section class="content">
+	<div class="box">
+		<div class="box-header">
+			<h3 class="box-title">Categorias de productos</h3>
+		</div>
+		<!-- /.box-header -->
+		{% if category_list %}
+		<div class="box-body">
+			<table id="table" class="table table-bordered table-striped">
+			<thead>
+			<tr>
+				<th>#</th>
+				<th>Nombre</th>
+				<th>Acciones</th>
+			</tr>
+			</thead>
+			<tbody>
+			{% for category in category_list|dictsort:"name" %}
+			<tr>
+				<td>{{ forloop.counter }}</td>
+				<td><a href="{{ category.get_absolute_url }}">{{ category.name }}</td>
+				<td>
+					<a href="{% url 'products:category' category.id category.name|slugify %}"><i class="fa fa-fw fa-plus"></i></a>
+					{% if request.user.is_staff %}
+						<a href="{% url 'products:category-update' category.id %}"><i class="fa fa-fw fa-check"></i></a>
+						<a href="{% url 'products:category-delete' category.id %}"><i class="fa fa-fw fa-times"></i></a>
+					{% endif %}
+				</td>
+			</tr>
+			{% endfor %}
+			</tbody>
+			<tfoot>
+			<tr>
+				<th>#</th>
+				<th>Nombre</th>
+				<th>Acciones</th>
+			</tr>
+			</tfoot>
+			</table>
+			{% include 'core/includes/pagination.html' %} 
+		</div>
+		<!-- /.box-body -->
+		{% else %}
+			<p class="help_block">Sin registros para mostrar.</p>
+		{% endif %}
+    </div>
+    <!-- /.box -->
+</section>
+{% endblock %}

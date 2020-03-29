@@ -1,0 +1,66 @@
+{% extends 'core/base/base.html' %}
+{% load static %}
+{% block title %}Actualizar categoría{% endblock %}
+{% block content %}
+<section class="content-header">
+  <h1>
+    Categoría
+  </h1>
+</section>
+<section class="content">
+
+	<div class="col-md-12">
+		<div class="box box-primary">
+			<div class="box-header with-border">
+				<h3 class="box-title">Detalle</h3>
+			</div>
+
+			<form action="" method="post">{% csrf_token %}
+				{% for hidden_field in form.hidden_fields %}
+					{{ hidden_field }}
+				{% endfor %}
+
+				{% if form.non_field_errors %}
+					<div class="panel panel-danger">
+						<div class="panel-heading">Errores</div>
+							{% for error in form.non_field_errors %}
+								<div class="panel-content">{{ error }}</div>
+							{% endfor %}
+						</div>
+					</div>
+				{% endif %}
+
+				<div class="box-body">
+					{% for field in form.visible_fields %}
+						<div class="form-group">
+							<label for="" class="col-sm-2 control-label"> {{ field.label_tag }}</label>
+							<div class="col-sm-10">
+								{{field}}						
+								{% if field.errors %}
+									{% for error in field.errors %}
+										<p style="color: red">{{ error }}</p>
+									{% endfor %}
+								{% endif %}
+								{% if field.help_text %}
+									<p class="help-block"><small>{{ field.help_text }}</small></p>
+								{% endif %}
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+				<!-- /.box-body -->		
+				<div class="box-footer">
+					<div class="col-lg-offset-2 col-lg-10">
+						<input class= "btn btn-primary" type="submit" value="Actualizar">
+						<a class= "btn btn-default" href="{% url 'products:categories' %}">Volver</a>
+					</div>
+				</div>
+				<!-- /.box-footer -->
+			</form>
+		</div>
+		<!-- /.box -->
+	</div>
+	<!-- /.col -->
+
+</section>
+{% endblock %}

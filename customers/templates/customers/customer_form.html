@@ -1,0 +1,64 @@
+{% extends 'core/base/base.html' %}
+{% load static %}
+{% block title %} Nuevo cliente{{page.title}}{% endblock %}
+{% block content %}
+<section id="main-content">
+  <section class="wrapper">
+		<div class="row">
+      <div class="col-lg-12">
+        <section class="panel">					
+					<div class="row">
+						<div class="col-lg-12">
+							<!--<h3 class="page-header"><i class="fa fa-table"></i>List</h3>-->
+							<div class="col-sm-12 dark-bg">
+								<h2 class="text-center">Nuevo <b>Cliente</b></h2>
+							</div>
+					</div>
+          <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+						{% for hidden_field in form.hidden_fields %}
+							{{ hidden_field }}
+						{% endfor %}
+
+						{% if form.non_field_errors %}
+						<div class="panel panel-danger">
+                  <div class="panel-heading">Panel heading</div>
+									{% for error in form.non_field_errors %}
+                  	<div class="panel-content">{{ error }}</div>
+									{% endfor %}
+                </div>
+						{% endif %}
+
+						<div class="panel-body">
+							{% for field in form.visible_fields %}
+								<div class="form-group">
+									<label class="col-sm-2 control-label"> {{ field.label_tag }}</label>
+									<div class="col-sm-10">
+										{{field}}
+										
+										{% if field.errors %}
+											{% for error in field.errors %}
+												<p style="color: red">{{ error }}</p>
+											{% endfor %}
+										{% endif %}
+
+										{% if field.help_text %}
+											<small style="color: grey">{{ field.help_text }}</small>
+										{% endif %}
+									</div>
+								</div> 
+							{% endfor %}
+							<div class="form-group">
+								<div class="col-lg-offset-2 col-lg-10">
+									<input class="btn btn-primary" type="submit" value="Agregar">
+										<a class= "btn btn-default" href="{% url 'customers:customers' %}">Cancelar</a>
+								</div>
+							</div>   
+						</div>	
+					</form>
+				                    
+				</section>
+      </div>
+		</div>
+	</section>
+</section>
+{% endblock %}

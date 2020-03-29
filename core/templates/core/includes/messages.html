@@ -1,0 +1,35 @@
+{% load static %}
+{% if messages %}
+    {% for msg in messages %}
+        {% if msg.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+            <div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-ban"></i> Error!</h4>
+
+        {% elif msg.level == DEFAULT_MESSAGE_LEVELS.DEBUG %}
+            <div class="alert alert-warning alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4><i class="icon fa fa-warning"></i> DEBUG</h4>
+
+        {% elif msg.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+            <div class="alert alert-{% if msg.tags %}{{ msg.tags|lower }} {% endif %} alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4><i class="icon fa fa-check"></i> Exitoso!</h4>
+
+        {% elif msg.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+            <div class="alert alert-{% if msg.tags %}{{ msg.tags|lower }} {% endif %} alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4><i class="icon fa fa-{% if msg.tags %}{{ msg.tags|lower }} {% endif %}"></i> Atención!</h4>
+
+        {% else %} {# Mensaje de tipo INFO #}
+            <div class="alert alert-{% if msg.tags %}{{ msg.tags|lower }} {% endif %} alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4><i class="icon fa fa-{% if msg.tags %}{{ msg.tags|lower }} {% endif %}"></i> 
+                    {% if msg.tags %} {{ msg.tags|title }}! {% endif %}</h4>
+        
+        {% endif %}
+                <p>{{ msg|safe }}</p>
+            </div>
+    {% endfor %}
+{% endif %}
+

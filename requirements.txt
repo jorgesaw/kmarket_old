@@ -1,0 +1,8 @@
+Django==2.2.10
+pytz==2019.1
+sqlparse==0.3.0
+django-ckeditor
+Pillow
+djangorestframework==3.9.1
+django-filter
+markdown
